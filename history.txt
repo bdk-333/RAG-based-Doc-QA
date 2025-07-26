@@ -1,0 +1,151 @@
+Role :- role
+		Content :- system
+
+Role :- content
+		Content :- You are a helpful assistant, who does exactly as asked to do.
+
+Role :- role
+		Content :- user
+
+Role :- content
+		Content :- 
+    Below are details of a resume document. However, it's unstructured and jumbled and therefore most of it's details are not in any kind of order. Your task is to use specifically these details and create a more structured format that is easy to embed using embedding model and store in a vector database.
+    
+    For example, "jennifer lopez i'm a popular singer with millions of fans worldwide. most famous songs are 'get on the floor', 'la la la la', and more." for these toy details, we can make the following structure:
+    
+    Personal information:
+    Name: Jennifer Lopez
+    Occupation: famous singer
+    
+    Experience:
+    famous songs are get on the floor and la la la la
+    
+    Achievements:
+    have millions of fans worldwide.
+    
+    However, this was just a dummy example. Real resumes have a lot of details and the most common sections are: personal details and contact links (example linkedin, gitbub, kaggle, and more), experience, education, projects, skills, certifications. There might be other fields in some particular resumes.
+    
+    Now, following are the unstructured details of a resume, create a structured one from it and separate it with a newline character. NOTE: Don't generate greeting and help questions at the start of the response or at the end, only return the structured resume details. And DO NOT leave any skill mention in the resume out, must mention it.
+    
+    details: 
+    ['Kirtan Parekh +918160161621 kirtansp333@gmail.com www.linkedin.com/in/kirtan-s-parekh Profile Education Skills Certificates and Badges Projects Hungry Point food for the and items to A sample ordering website, build using HTML, CSS Javascript, that lists number of food user select and order. the online Tic-Tac-Toe Game An website game of and JavaScript. the let the users play Tic-Tac-Toe. Designed using HTML CSS, and logic in Interactivity with JavaScript of Bachelor Engineering in Computer Patel Institute of Pursuing (B.E.) Engineering at Technology. A. D. HTML5, CSS3 and Javascript PHP and Linux Operating System SQL, MySQL database Time management Work Ethics Data Structures and Algorithms Adaptability Work responsibility Self - Confident ......... Offered by the Coursera platform. It was interactive using Javascript. about University of Michigan on making web pages Issued on : 8th November 2022 Get started with UX Issued on 16th December 2022 Offered by SAP use of HTML, CSS and JavaScript. free learning. It provided basic Seeking an in entry-level the organization and of the field internship opportunity IT, bringing dedication to gaining experience and improving my knowledge of the field. SAP CSR Program - Code Unnati Based on Industry implemented by Edunet Foundation (currently pursuing). 4.0 technologies, Key Learning :- Python, Git - Github, IOT, MongoDB basics, basic ML Algorithms. Completed HSC from R.P.T.P Science College with passing percentage of 75.23 Completed from with passing percentage of SSC I. B. Patel English School 82.33 ']
+
+Role :- role
+		Content :- assistant
+
+Role :- content
+		Content :- Personal information:
+Name: Kirtan Parekh
+Contact links:
+- Email: kirtansp333@gmail.com
+- LinkedIn: www.linkedin.com/in/kirtan-s-parekh
+Skills:
+- HTML5
+- CSS3
+- JavaScript
+- PHP
+- Linux Operating System
+- SQL
+- MySQL database
+- Data Structures and Algorithms
+- Adaptability
+- Work responsibility
+- Self-confidence
+
+Experience:
+- Hungry Point food for the and items to A sample ordering website (using HTML, CSS, JavaScript)
+- The online Tic-Tac-Toe Game (using JavaScript)
+
+Education:
+- Bachelor Engineering in Computer Technology (B.E.) at Patel Institute of Pursuing ( completed)
+  - Education: University of Michigan
+  - Field of Study: Web Development
+
+Projects:
+- Hungry Point food for the and items to A sample ordering website, build using HTML, CSS, Javascript
+- The online Tic-Tac-Toe Game, an website game of JavaScript
+- UX Design (Issued on : 8th November 2022)
+- Get started with UX (Issued on 16th December 2022)
+
+Certifications:
+- SAP CSR Program - Code Unnati
+- Edunet Foundation's Industry implemented technologies
+
+Achievements:
+- Completed HSC from R.P.T.P Science College with passing percentage of 75.23
+- Completed from with passing percentage of SSC I. B. Patel English School (82.33)
+
+Certificates and Badges:
+- None mentioned in the details
+
+Role :- role
+		Content :- user
+
+Role :- content
+		Content :- 
+    Below are details of a resume document. However, it's unstructured and jumbled and therefore most of it's details are not in any kind of order. Your task is to use specifically these details and create a more structured format that is easy to embed using embedding model and store in a vector database.
+    
+    For example, "jennifer lopez i'm a popular singer with millions of fans worldwide. most famous songs are 'get on the floor', 'la la la la', and more." for these toy details, we can make the following structure:
+    
+    Personal information:
+    Name: Jennifer Lopez
+    Occupation: famous singer
+    
+    Experience:
+    famous songs are get on the floor and la la la la
+    
+    Achievements:
+    have millions of fans worldwide.
+    
+    However, this was just a dummy example. Real resumes have a lot of details and the most common sections are: personal details and contact links (example linkedin, gitbub, kaggle, and more), experience, education, projects, skills, certifications. There might be other fields in some particular resumes.
+    
+    Now, following are the unstructured details of a resume, create a structured one from it and separate it with a newline character. NOTE: Don't generate greeting and help questions at the start of the response or at the end, only return the structured resume details. And DO NOT leave any skill mention in the resume out, must mention it.
+    
+    details: 
+    ['Kirtankumar Parekh P R O F I L E E X P E R I E N C E Motivated Data Science graduate student at DePaul University with a background in Computer Engineering. Seeking a Data Science or Python development internship to leverage analytical skills and contribute to impactful projects. Possesses strong organizational skills, attention to detail, and proven ability to work effectively both independently and as part of a team. Successfully completed a 6-week internship through IBM’s SkillsBuild Platform. Learned the basics of AI and ML, including algorithms like Linear Regression and Logistic Regression. Worked on the "Mental Fitness Tracker" project, training Regression models on mental health data from over 150 countries (1990-2020), DALY as the Target variable. Linear Regression performed best with R2 score of 0.76 mean after Cross Validation. EDUNET Foundation in collaboration with AICTE Artificial Intelligence intern Jun 2023 - Jul 2023 SAP Code Unnati Training Program Internship Trainee Aug 2022 - Jan 2023 E D U C A T I O N Relevant Coursework: Python for Data Science, Data Structures & Algorithms, Database Management Systems, Machine Learning, Calculus, Statistics and Probability. CVM University: June 2020 - June 2024 B.E. in Computer Engineering  (CGPA: 8.89 / 10.0) S K I L L S Programming Language: Python, Java, C/C++ Python Libraries: NumPy, Pandas, Scikit- learn, Matplotlib Database: MySQL Mathematics: Linear Algebra, Statistics and Probability (224) 251-9625 kirtansp333@gmail.com Chicago, IL, 60604 Data Science and ML Fundamentals Successfully completed a 12-week training program by Code Unnati, an SAP CSR initiative implemented by EDUNET Foundation.   Learned about emerging technologies like Internet of Things, Machine Learning and Deep Learning, Business Technology Platforms, Python programming, and Soft Skills. P R O J E C T S Indian Cricket player Classifier Collected player images from the internet, preprocessed it. Trained classification models, SVM achieved 77.8% accuracy score. Developed a user-friendly UI using Flask. Emotion Detection System Created a real-time emotion detection system using a pretrained model in python. Can classify up to 7 emotions from live camera feeds. Data Structures and Algorithms LinkedIn Profile -  https://www.linkedin.com/in/kirtan-s-parekh/ GitHub Prolife - https://github.com/bdk-333 Venom Technologies Python Developer intern Jan 2024 - Apr 2024 Successfully completed a 16-week internship at Venom Technologies in last semester. Worked on Grocery Store Management System, a light-weight web app for small-scaled grocery store owner to perform data operations of the store like CRUD operations in products, customer orders, categories. Used Flask and Python in backend with MySQL database and Bootstrap in frontend. M.S. in Data Science (GPA: 4.0) DePaul University: Aug 2024 - June 2026 (Expected) Relevant Coursework: Python Programming, Data Analysis and Regression, Data Science Fundamentals, Databases for Analytics, Kaggle Prolife - https://www.kaggle.com/blackdragonk333 Predicting Insurance Premiums 4.12 (Kaggle Competition): Applied data preprocessing and EDA on given dataset. Trained multiple Regressors using Scikit-Learn library, in Pipelines. Linear Regression with Log transformation on Target variable gave the best result of 1.087 Root Mean Squared Log Error (RMSLE). Team Work and Communication Quick Learner Problem Solving L A N G U A G E S English Hindi Gujarati Web Dev: HTML, CSS, JS and Flask ']
+
+Role :- role
+		Content :- assistant
+
+Role :- content
+		Content :- Personal information:
+Name: Kirtan Parekh
+Contact links:
+- Email: kirtansp333@gmail.com
+- Phone number: 224 251-9625
+- LinkedIn Profile: https://www.linkedin.com/in/kirtan-s-parekh/
+- GitHub Profile: https://github.com/bdk-333
+
+Personal Details:
+- Education: B.E. in Computer Engineering (C.G.P.A.: 8.89 / 10.0) from CVM University, expected to complete M.S. in Data Science at DePaul University
+- Skills:
+  - Programming Language: Python, Java, C/C++
+  - Python Libraries: NumPy, Pandas, Scikit-learn, Matplotlib
+  - Database: MySQL
+  - Mathematics: Linear Algebra, Statistics and Probability
+
+Experience:
+- Internship with IBM's SkillsBuild Platform (6 weeks)
+- SAP Code Unnati Training Program Internship Trainee (Aug 2022 - Jan 2023)
+- Data Science and ML Fundamentals training program by Code Unnati (12-weeks)
+- Project: Indian Cricket player Classifier
+    - Collected player images from the internet, preprocessed it.
+    - Trained classification models, SVM achieved 77.8% accuracy score.
+    - Developed a user-friendly UI using Flask.
+
+- Internship at Venom Technologies (Jan 2024 - Apr 2024)
+  - Worked on Grocery Store Management System, a light-weight web app for small-scaled grocery store owner
+  - Used Flask and Python in backend with MySQL database and Bootstrap in frontend.
+
+Achievements:
+- Successfully completed projects
+- Achieved high scores in Kaggle competitions (Predicting Insurance Premiums)
+
+Projects:
+- Indian Cricket player Classifier
+- Emotion Detection System
+- Grocery Store Management System
+
+Certifications:
+- SAP CSR Program - Code Unnati
+
