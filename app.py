@@ -1,5 +1,9 @@
 import streamlit as st
 import pymupdf
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from sentence_transformers import SentenceTransformer
+
+JOINING_STR = "\n\n" + "-*"*50 + "\n\n"
 
 @st.cache_data
 def extract_pages(file):
@@ -14,6 +18,38 @@ def extract_pages(file):
     except Exception as e:
         st.error(f"Error processing PDF file: {e}")
         return None
+    
+    
+# function for chunking given text:
+def generate_chunks(text, chunk_size=500, chunk_overlap=120):
+    
+    # splitter obj
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size = chunk_size,
+        chunk_overlap = chunk_overlap,
+        length_function = len
+    )
+    
+    # generate chunks
+    chunks = text_splitter(text)
+    
+    return chunks
+
+
+# function to store embeddings into chromadb
+def store_embedding(embeddings):
+    pass
+
+# function to generate embeddings from chunks
+def generate_embeddings(chunks):
+    
+    # embedding model
+    model = SentenceTransformer("all-MiniLM-L6-V2")
+    
+    # create embeddings
+    chunk_embeddings = model.encode(chunks)    # encode() methods only takes list, so if only one chunk then create a list first
+    
+    return chunk_embeddings
 
 
 # -------------------- UI Configuration -------------------------
@@ -68,11 +104,17 @@ if prompt := st.chat_input("What would you like to ask from the uploaded documen
     # added user prompt to previous messages
     st.session_state.messages.append({"role": "user", "content": prompt})
     
-    with st.chat_message("assistant"):
-        # response = f"User said: {prompt}"
-        full_text = "\n\n".join(st.session_state.pages)
-        response = f"I have the document text available. The user asked: {prompt}.\n{len(full_text)} characters found in the pdf file."
-        st.markdown(response)
+    try:
+        with st.chat_message("assistant"):
+            # response = f"User said: {prompt}"
+            full_text = JOINING_STR.join(st.session_state.pages)
+            
+            # give text to LLM after embedding and get answer to the user prompt:
+            
+            response = "get response here"
+            st.markdown(response)
     
-    # add assistant response to previous messages
-    st.session_state.messages.append({"role": "assistant", "content": response})
+        # add assistant response to previous messages
+        st.session_state.messages.append({"role": "assistant", "content": response})
+    except Exception as e:
+        st.error(f"Following issue was detected: {e}")
