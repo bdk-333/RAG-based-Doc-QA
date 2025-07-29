@@ -42,6 +42,7 @@ This project implements a full Retrieval-Augmented Generation (RAG) pipeline. Th
 
 This diagram shows the main components of the system and the flow of information between them. It provides a bird's-eye view of how a user interacts with the application to get an answer.
 
+``` mermaid
 graph TD
     subgraph "User's Computer"
         A[User]
@@ -62,6 +63,7 @@ graph TD
 
     style B fill:#FF4B4B,stroke:#000,stroke-width:2px
     style D fill:#1E90FF,stroke:#000,stroke-width:2px
+```
 
 #### Explanation of the High-Level Flow:
 
@@ -76,6 +78,7 @@ graph TD
 
 This diagram provides a detailed look inside the "RAG Backend Logic" block from the high-level view. It shows the two distinct stages of the pipeline: Indexing (processing the PDF) and Retrieval & Generation (answering a question).
 
+```mermaid
 graph TD
     subgraph "Stage 1: Indexing Pipeline (One-time per PDF)"
         direction LR
@@ -99,6 +102,7 @@ graph TD
 
     style I5 fill:#9AE6B4,stroke:#2F855A,stroke-width:2px
     style R6 fill:#1E90FF,stroke:#000,stroke-width:2px
+```
 
 #### Explanation of the Low-Level Flow:
 
