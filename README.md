@@ -3,10 +3,10 @@
 A fully functional Retrieval-Augmented Generation (RAG) chatbot that lets you converse with your PDF documents. Powered by a local Large Language Model (LLM) via Ollama, your data stays private and secure.
 
 ## Built with a sleek Streamlit interface, this app makes it easy to upload PDFs, ask questions, and receive intelligent, context-aware answers sourced directly from your documents.
-
+---
 ## 📸 Preview
 (Insert a screenshot or demo GIF here)
-
+---
 ## ✨ Features
 1. Interactive Chat Interface
   - Simple and intuitive UI built with Streamlit.
@@ -22,7 +22,7 @@ A fully functional Retrieval-Augmented Generation (RAG) chatbot that lets you co
 
 5. Source Citing
   - Responses include page numbers from the PDF used to generate the answer.
-
+---
 ## 🛠️ Technical Stack
 - Application Framework: Streamlit
 - LLM Serving: Ollama with Llama3.2 (or other models as you wish)
@@ -30,8 +30,9 @@ A fully functional Retrieval-Augmented Generation (RAG) chatbot that lets you co
 - Document Loading: PyMuPDF (previously Fitz)
 - Embedding Model: Sentence-Transformers (all-MiniLM-L6-v2)
 - Vector Database: ChromaDB
-
+---
 ## 📁 Project Structure
+```
 /rag_pdf_chatbot
 │
 ├── app.py              # Main Streamlit application entry point
@@ -41,7 +42,8 @@ A fully functional Retrieval-Augmented Generation (RAG) chatbot that lets you co
 ├── config.py           # Configuration constants (model names, URLs, etc.)
 ├── requirements.txt    # Project dependencies
 └── history.txt         # Stores the latest conversation history
-
+```
+---
 ## 🚀 Setup and Installation
 1. Prerequisites:
 - Python 3.8+
@@ -58,7 +60,7 @@ A fully functional Retrieval-Augmented Generation (RAG) chatbot that lets you co
 5. Run the Application. (Ensure Ollama is running in the background, then launch the app)
 
 The application will open in your default web browser.
-
+---
 ## 💬 How to Use
 - Launch the application: run `streamlit run app.py` to run the app
 - Use the sidebar to upload a PDF file. (Must upload a PDF to start the chat)
