@@ -54,12 +54,12 @@ graph TD
         D[Ollama / Llama3]
     end
 
-    A -->|1. Uploads PDF & Asks Question| B
-    B -->|2. Sends PDF & Query| C
-    C -->|3. Sends Augmented Prompt| D
-    D -->|4. Returns Generated Answer| C
-    C -->|5. Streams Answer to UI| B
-    B -->|6. Displays Answer| A
+    A -->|"1. Uploads PDF & Asks Question"| B
+    B -->|"2. Sends PDF & Query"| C
+    C -->|"3. Sends Augmented Prompt"| D
+    D -->|"4. Returns Generated Answer"| C
+    C -->|"5. Streams Answer to UI"| B
+    B -->|"6. Displays Answer"| A
 
     style B fill:#FF4B4B,stroke:#000,stroke-width:2px
     style D fill:#1E90FF,stroke:#000,stroke-width:2px
@@ -81,20 +81,18 @@ This diagram provides a detailed look inside the "RAG Backend Logic" block from 
 ```mermaid
 graph TD
     subgraph "Stage 1: Indexing Pipeline (One-time per PDF)"
-        direction LR
-        I1[Uploaded PDF] --> I2{1. Text Extraction<br>(PyMuPDF)}
-        I2 --> I3{2. Text Chunking<br>(LangChain)}
-        I3 --> I4{3. Embed Chunks<br>(SentenceTransformer)}
+        I1[Uploaded PDF] --> I2{"1. Text Extraction<br>(PyMuPDF)"}
+        I2 --> I3{"2. Text Chunking<br>(LangChain)"}
+        I3 --> I4{"3. Embed Chunks<br>(SentenceTransformer)"}
         I4 --> I5[(Vector Database<br>ChromaDB)]
     end
 
     subgraph "Stage 2: Retrieval & Generation Pipeline (Per Query)"
-        direction TD
-        R1[User Query] --> R2{4. Embed Query<br>(SentenceTransformer)}
-        R2 --> R3{5. Similarity Search}
+        R1[User Query] --> R2{"4. Embed Query<br>(SentenceTransformer)"}
+        R2 --> R3{"5. Similarity Search"}
         I5 --> R3
-        R3 --> R4{6. Retrieve Top-N<br>Relevant Chunks}
-        R4 --> R5{7. Augment Prompt<br>(Context + Query)}
+        R3 --> R4{"6. Retrieve Top-N<br>Relevant Chunks"}
+        R4 --> R5{"7. Augment Prompt<br>(Context + Query)"}
         R1 --> R5
         R5 --> R6[Ollama / Llama3]
         R6 --> R7[Generated Answer]
