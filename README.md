@@ -3,10 +3,10 @@
 A fully functional Retrieval-Augmented Generation (RAG) chatbot that lets you converse with your PDF documents. Powered by a local Large Language Model (LLM) via Ollama, your data stays private and secure.
 
 ## Built with a sleek Streamlit interface, this app makes it easy to upload PDFs, ask questions, and receive intelligent, context-aware answers sourced directly from your documents.
----
+
 ## 📸 Preview
 (Insert a screenshot or demo GIF here)
----
+
 ## ✨ Features
 1. Interactive Chat Interface
   - Simple and intuitive UI built with Streamlit.
