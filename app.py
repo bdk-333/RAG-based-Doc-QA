@@ -85,7 +85,7 @@ def setup_vector_store(chunks, metadata, embedding_model, client):
     return collection
 
 # function to get most simliar chunks
-def query_vector_store(query, collection, embedding_model, top_n = 3):
+def query_vector_store(query, collection, embedding_model, top_n = 5):
     if collection is None:
         return None
     
@@ -109,8 +109,10 @@ def generate_query(query, context, has_context):
     # if relevant docs are found from the pdf
     if has_context:
         prompt = f"""
-        Based on the following context from a PDF document, please answer the user's question.
+        Based on the following context from a PDF document, please answer the user's question. (NOTE that relevant context is found)
         Only use information from the context. If the context does not contain the answer, state that you cannot find the answer in the document.
+
+        Also mention the sources of the context at the very end of the response after allowing a few blank lines of space.
 
         Context:
         ---
@@ -124,8 +126,6 @@ def generate_query(query, context, has_context):
         prompt = f"""
         The user asked a question, but there was no relevant information found in the user provided PDF document.
         Please provide a general, helpful answer to the user's question using the most silimar context from the pdf, even though they are not similar enough.
-        
-        NOTE: ONLY USE CONTEXT IF IT MAKES SENSE TO THE QUESTION, ELSE PROVIDE A GENERAL HELPFUL ANSWER. BUT NEVER PROVIDE AN ANSWER IF IT DOES NOT MAKE SENSE FROM THE GIVEN CONTEXT.
 
         Context:
         ---
@@ -138,7 +138,7 @@ def generate_query(query, context, has_context):
 
 # function to get streams of responses
 def get_streamed_reaponse(prompt):
-    messages = st.session_state.messages
+    messages = [{"role": "user", "content": prompt}]
     
     json_data = {
         "model": MODEL,
@@ -199,6 +199,16 @@ def get_streamed_reaponse(prompt):
     except Exception as e:
         print(e)
 
+
+# function to handle stream data coming from llm
+def stream_handler(prompt):
+    """
+    A wrapper generator that calls the main streaming function
+    and yields only the 'answer' tokens for st.write_stream.
+    """
+    for part_type, token in get_streamed_reaponse(prompt):
+        if part_type == "answer":
+            yield token
 
 # -------------------- UI Configuration -------------------------
 
@@ -283,7 +293,7 @@ if prompt := st.chat_input("What would you like to ask from the uploaded documen
                     )
                     
                     # second, decide if the content is relevant enough
-                    RELEVANCE_THRESHOLD = 0.7
+                    RELEVANCE_THRESHOLD = 0.35
                     if context_docs and distances[0] < RELEVANCE_THRESHOLD:
                         context_for_llm = "\n\n".join(context_docs)
                         
@@ -292,23 +302,26 @@ if prompt := st.chat_input("What would you like to ask from the uploaded documen
                         context_for_llm += f"\n\nSources:\n{sources}"
                         has_context = True
                     else:
-                        context_for_llm = "\n\n".join(context_docs)
+                        context_for_llm = "No relevant context found in the document."
                         has_context = False
                     
                     # third, generate prompt to give to llm
                     final_prompt = generate_query(query=prompt, context=context_for_llm, has_context=has_context)
                     
-                    answer = ""
-                    # finally, give prompt to llm and display streamed response
-                    for part_type, token in get_streamed_reaponse(final_prompt):
-                        if part_type == "think":
-                            pass    # do nothing
-                        else:
-                            answer += token
+                    # get the final augmented prompt and give it to the llm for generation
+                    response_generator = stream_handler(final_prompt)
                     
-                    st.markdown(answer)
+                    # display and store the generated response
+                    full_response = st.write_stream(response_generator)
     
         # add assistant response to previous messages
-        st.session_state.messages.append({"role": "assistant", "content": answer})
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
     except Exception as e:
         st.error(f"Following issue was detected: {e}")
+        
+        
+# store conversations in a separate file for record
+with open("history.txt", "w", encoding="utf-8") as file:
+    for conversation in st.session_state.messages:
+        file.write(f"\n{conversation["role"]}:- {conversation["content"]}\n")
+        
