@@ -5,31 +5,42 @@ A fully functional Retrieval-Augmented Generation (RAG) chatbot that lets you co
 ## Built with a sleek Streamlit interface, this app makes it easy to upload PDFs, ask questions, and receive intelligent, context-aware answers sourced directly from your documents.
 
 ## 📸 Preview
-(Insert a screenshot or demo GIF here)
+
+![Screenshot of app](<Screenshot.png>)
 
 ## ✨ Features
+
 1. Interactive Chat Interface
-  - Simple and intuitive UI built with Streamlit.
+
+- Simple and intuitive UI built with Streamlit.
 
 2. PDF Document Processing
-  - Upload any PDF and automatically extract, chunk, and process its text content.
+
+- Upload any PDF and automatically extract, chunk, and process its text content.
 
 3. Private & Local LLM
-  - Uses a local LLM (e.g., Llama3.2 via Ollama) — no third-party APIs involved.
+
+- Uses a local LLM (e.g., Llama3.2 via Ollama) — no third-party APIs involved.
 
 4. Retrieval-Augmented Generation (RAG)
-  - Finds the most relevant passages from the PDF to answer your questions, reducing hallucinations and improving accuracy.
+
+- Finds the most relevant passages from the PDF to answer your questions, reducing hallucinations and improving accuracy.
 
 5. Source Citing
-  - Responses include page numbers from the PDF used to generate the answer.
+
+- Responses include page numbers from the PDF used to generate the answer.
+
 ---
+
 ## 🛠️ Technical Stack
+
 - Application Framework: Streamlit
 - LLM Serving: Ollama with Llama3.2 (or other models as you wish)
 - Text Processing: LangChain (for text splitting)
 - Document Loading: PyMuPDF (previously Fitz)
 - Embedding Model: Sentence-Transformers (all-MiniLM-L6-v2)
 - Vector Database: ChromaDB
+
 ---
 
 ## 👨‍💻 System Architecture
@@ -38,7 +49,7 @@ This project implements a full Retrieval-Augmented Generation (RAG) pipeline. Th
     - a high-level overview of the user and system interactions, and 
     - a low-level view detailing the internal workings of the RAG pipeline itself.
 
-### High-Level Architecture:
+### High-Level Architecture
 
 This diagram shows the main components of the system and the flow of information between them. It provides a bird's-eye view of how a user interacts with the application to get an answer.
 
@@ -65,7 +76,7 @@ graph TD
     style D fill:#1E90FF,stroke:#000,stroke-width:2px
 ```
 
-#### Explanation of the High-Level Flow:
+#### Explanation of the High-Level Flow
 
 - User Interaction: The user opens the web application in their browser and interacts with the Streamlit UI to upload a PDF and type a question.
 - UI to Backend: The Streamlit frontend sends the uploaded file and the user's query to the backend logic, which is also managed by Streamlit's server process.
@@ -74,7 +85,7 @@ graph TD
 - Streaming to UI: The backend receives the response from the LLM and streams it token-by-token back to the Streamlit UI.
 - Display: The user sees the answer appear in the chat window in real-time.
 
-### Low-Level RAG Pipeline:
+### Low-Level RAG Pipeline
 
 This diagram provides a detailed look inside the "RAG Backend Logic" block from the high-level view. It shows the two distinct stages of the pipeline: Indexing (processing the PDF) and Retrieval & Generation (answering a question).
 
@@ -105,12 +116,14 @@ graph TD
 #### Explanation of the Low-Level Flow:
 
 1. Stage 1: Indexing Pipeline (This happens once when a new PDF is uploaded)
+
 - Text Extraction: The text content from the uploaded PDF is extracted using the PyMuPDF library.
 - Text Chunking: The extracted text is long, so it's broken down into smaller, manageable, and slightly overlapping chunks using LangChain's RecursiveCharacterTextSplitter. This ensures semantic context is not lost at the boundaries.
 - Embedding: Each text chunk is converted into a numerical vector (an "embedding") using the SentenceTransformer model. These embeddings capture the semantic meaning of the text.
 - Vector Storage: The embeddings and their corresponding text chunks are stored and indexed in a ChromaDB vector database. This database is optimized for fast similarity searches.
 
 2. Stage 2: Retrieval & Generation Pipeline (This happens every time the user asks a question)
+
 - Embed Query: The user's question is converted into an embedding using the same SentenceTransformer model.
 - Similarity Search: This query embedding is used to search the ChromaDB database. The database calculates the similarity (using cosine distance) between the query embedding and all the stored chunk embeddings.
 - Retrieve Context: The top 'N' (in this case, 5) most similar chunks from the PDF are retrieved. These are the pieces of text most relevant to the user's question.
@@ -118,8 +131,10 @@ graph TD
 - Generate Answer: The final, augmented prompt is sent to Llama3.2, which generates the answer. This answer is then streamed back to the user.
 
 ---
+
 ## 📁 Project Structure
-```
+
+```markdown
 /rag_pdf_chatbot
 │
 ├── app.py              # Main Streamlit application entry point
@@ -130,13 +145,18 @@ graph TD
 ├── requirements.txt    # Project dependencies
 └── history.txt         # Stores the latest conversation history
 ```
+
 ---
+
 ## 🚀 Setup and Installation
+
 1. Prerequisites:
+
 - Python 3.8+
 - Ollama installed and running with at least one model (I used Llama3.2 [https://ollama.com/library/llama3.2])
 
 2. Install the LLM
+
 - Pull the Llama3 model using:
     - (You can use a different model, but update the MODEL variable in config.py accordingly.)
 
@@ -147,8 +167,10 @@ graph TD
 5. Run the Application. (Ensure Ollama is running in the background, then launch the app)
 
 The application will open in your default web browser.
+
 ---
 ## 💬 How to Use
+
 - Launch the application: run `streamlit run app.py` to run the app
 - Use the sidebar to upload a PDF file. (Must upload a PDF to start the chat)
 - Wait for the document to be processed. (App will take some time to process, please wait a little bit. Also PDF processing time depends of the size of the pdf.) `This app does not support images, it only supports simple text. You can modify pdf_processor.py file to make detailed extraction from pdf`.
